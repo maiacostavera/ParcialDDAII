@@ -35,7 +35,11 @@ fun BreweryIcon(iconUrl: String?, modifier: Modifier = Modifier) {
             }
         },
         update = { imageView ->
-            if (iconUrl == null || inPreview) {
+            if (inPreview) {
+                // Ni siquiera llamamos a Picasso.get(): en la vista previa no hay
+                // Application arrancada y tiraria una excepcion.
+                imageView.setImageResource(R.drawable.ic_brewery_placeholder)
+            } else if (iconUrl == null) {
                 // Cortamos cualquier descarga anterior y dejamos el dibujo propio.
                 Picasso.get().cancelRequest(imageView)
                 imageView.setImageResource(R.drawable.ic_brewery_placeholder)

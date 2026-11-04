@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="white">#FFFFFFFF</color>
+
+    <!-- Paleta de la app (ámbar, por el color de la cerveza). Las variantes _dark
+         las usa el tema de modo oscuro, en values-night/themes.xml.
+         Los mismos valores están repetidos en ui/theme/Color.kt, porque Compose
+         arma sus colores en Kotlin y no lee este archivo. -->
+    <color name="brand_primary">#8A5100</color>
+    <color name="brand_primary_container">#FFDCBE</color>
+    <color name="brand_on_primary_container">#2C1600</color>
+
+    <color name="brand_primary_dark">#FFB871</color>
+    <color name="brand_primary_container_dark">#693C00</color>
+    <color name="brand_on_primary_container_dark">#FFDCBE</color>
+</resources>

@@ -1,0 +1,12 @@
+<resources>
+    <!-- Tema claro. NoActionBar porque la barra de arriba la ponemos nosotros
+         con la MaterialToolbar de activity_main.xml. -->
+    <style name="Base.Theme.BreweryGuide" parent="Theme.Material3.DayNight.NoActionBar">
+        <item name="colorPrimary">@color/brand_primary</item>
+        <item name="colorOnPrimary">@color/white</item>
+        <item name="colorPrimaryContainer">@color/brand_primary_container</item>
+        <item name="colorOnPrimaryContainer">@color/brand_on_primary_container</item>
+    </style>
+
+    <style name="Theme.BreweryGuide" parent="Base.Theme.BreweryGuide" />
+</resources>

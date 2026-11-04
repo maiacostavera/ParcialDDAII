@@ -1,0 +1,71 @@
+<resources>
+    <!-- Todos los textos visibles van aca y no sueltos en los XML ni en el codigo,
+         asi quedan en un solo lugar. Se usan con @string/nombre, getString() o
+         stringResource() en Compose. -->
+    <string name="app_name">BreweryGuide</string>
+
+    <!-- Pantalla 1: listado y buscador -->
+    <string name="hint_search">Ciudad o nombre</string>
+    <string name="button_search">Buscar</string>
+    <string name="button_show_all">Ver todas</string>
+    <string name="button_retry">Reintentar</string>
+    <string name="filter_city">Ciudad</string>
+    <string name="filter_name">Nombre</string>
+    <string name="error_empty_query">Escribí algo para buscar</string>
+
+    <!-- Pantalla 2: detalle en Compose -->
+    <string name="title_detail">Detalle de la cervecería</string>
+    <string name="label_address">Dirección</string>
+    <string name="label_phone">Teléfono</string>
+    <string name="label_website">Sitio web</string>
+    <string name="button_call">Llamar</string>
+    <string name="button_website">Visitar sitio web</string>
+    <string name="button_map">Ver en el mapa</string>
+    <string name="label_save_title">Guardar en Mis cervecerías</string>
+    <string name="label_saved_as">Guardada como</string>
+    <string name="button_remove_favorite">Quitar de Mis cervecerías</string>
+    <string name="error_no_dialer">No hay ninguna app para llamar</string>
+    <string name="error_no_browser">No hay ningún navegador instalado</string>
+    <string name="error_no_maps">No hay ninguna app de mapas instalada</string>
+
+    <!-- Pantalla 3: Mis cervecerías -->
+    <string name="title_favorites">Mis cervecerías</string>
+    <string name="tab_visited">Visitadas</string>
+    <string name="tab_pending">Pendientes</string>
+    <string name="status_visited">Visitada</string>
+    <string name="status_pending">Pendiente por visitar</string>
+    <string name="button_mark_visited">Ya la visité</string>
+    <string name="button_mark_pending">Pendiente por visitar</string>
+    <string name="button_delete">Borrar</string>
+    <string name="saved_at_format">Guardada el %1$s</string>
+    <string name="message_favorites_empty">Todavía no guardaste ninguna cervecería acá. Entrá al detalle de una y elegí si ya la visitaste o si queda pendiente.</string>
+
+    <!-- Confirmación antes de borrar -->
+    <string name="dialog_delete_title">Borrar cervecería</string>
+    <string name="dialog_delete_message">¿Seguro que querés sacar %1$s de tu lista?</string>
+    <string name="dialog_delete_confirm">Borrar</string>
+    <string name="dialog_cancel">Cancelar</string>
+
+    <!-- Tipos de establecimiento que devuelve la API, en castellano -->
+    <string name="type_micro">Microcervecería</string>
+    <string name="type_nano">Nanocervecería</string>
+    <string name="type_regional">Regional</string>
+    <string name="type_brewpub">Pub cervecero</string>
+    <string name="type_large">Cervecería grande</string>
+    <string name="type_planning">En proyecto</string>
+    <string name="type_bar">Bar</string>
+    <string name="type_contract">Produce para terceros</string>
+    <string name="type_proprietor">Elabora en planta ajena</string>
+    <string name="type_closed">Cerrada</string>
+    <string name="type_taproom">Salón de canillas</string>
+    <string name="type_cidery">Sidrería</string>
+    <string name="type_beergarden">Cervecería al aire libre</string>
+    <string name="type_unknown">Tipo no informado</string>
+
+    <!-- Datos que pueden faltar -->
+    <string name="not_available">No disponible</string>
+
+    <!-- Descripciones para lectores de pantalla -->
+    <string name="cd_brewery_icon">Ícono de la cervecería</string>
+    <string name="cd_back">Volver</string>
+</resources>

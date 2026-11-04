@@ -254,15 +254,15 @@ private fun CenteredBox(modifier: Modifier = Modifier, content: @Composable () -
 fun BreweryDetailContentPreview() {
     val sampleBrewery = BreweryDetails(
         id = "ejemplo-1",
-        name = "Patagonia Brewing",
+        name = "Cerveceria de Ejemplo",
         breweryType = "brewpub",
-        address = "Av. Bustillo 11.500, Bariloche, Río Negro, Argentina",
-        city = "Bariloche",
+        address = "Calle Falsa 123, Ciudad de Ejemplo, Argentina",
+        city = "Ciudad de Ejemplo",
         country = "Argentina",
-        phone = "+54 294 445 8600",
-        websiteUrl = "https://www.cervezapatagonia.com.ar",
-        latitude = -41.1156,
-        longitude = -71.4256,
+        phone = "+54 11 0000 0000",
+        websiteUrl = "https://www.example.com",
+        latitude = -34.6,
+        longitude = -58.4,
         status = BreweryDetails.STATUS_PENDING,
         savedAt = "2026-11-04"
     )

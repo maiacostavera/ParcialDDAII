@@ -43,7 +43,7 @@ class FavoriteRepository(context: Context) {
             put(DatabaseHelper.COLUMN_LATITUDE, brewery.latitude)
             put(DatabaseHelper.COLUMN_LONGITUDE, brewery.longitude)
             put(DatabaseHelper.COLUMN_STATUS, status)
-            put(DatabaseHelper.COLUMN_SAVED_AT, today())
+            put(DatabaseHelper.COLUMN_SAVED_AT, now())
         }
 
         val newRowId = db.insert(DatabaseHelper.TABLE_BREWERIES, null, values)
@@ -124,7 +124,7 @@ class FavoriteRepository(context: Context) {
         val values = ContentValues().apply {
             put(DatabaseHelper.COLUMN_STATUS, status)
             // Al cambiarla de estado vuelve a quedar arriba de la lista.
-            put(DatabaseHelper.COLUMN_SAVED_AT, today())
+            put(DatabaseHelper.COLUMN_SAVED_AT, now())
         }
 
         val rowsAffected = db.update(
@@ -195,11 +195,11 @@ class FavoriteRepository(context: Context) {
         )
     }
 
-    /** Fecha de hoy como texto, para la columna saved_at. */
-    private fun today(): String {
-        // El formato ano-mes-dia ordena bien alfabeticamente, que es como lo
-        // compara SQLite en el ORDER BY.
-        val format = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault())
+    /** Fecha y hora actuales como texto, para la columna saved_at. */
+    private fun now(): String {
+        // Este formato ordena bien alfabeticamente, que es como lo compara SQLite
+        // en el ORDER BY. La hora hace falta para ordenar las guardadas el mismo dia.
+        val format = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
         return format.format(Date())
     }
 

@@ -33,9 +33,9 @@ Dos cosas de la API condicionaron el código:
   `Success` con la lista vacía es un caso aparte en el ViewModel, que muestra el
   mensaje "No encontramos cervecerías con esa búsqueda".
 - **`phone` y `website_url` vienen en `null` bastante seguido** (en una muestra de 50,
-  47 tenían teléfono y 43 sitio web), y las cervecerías en estado `planning` ni
-  siquiera tienen dirección. Casi todos los campos del modelo son nulables y cada
-  dato que falta se oculta en vez de mostrarse vacío.
+  47 tenían teléfono, 43 sitio web y 39 coordenadas), y las cervecerías en estado `planning`
+  casi nunca tienen calle (a 49 de 50 les faltaba). Casi todos los campos del modelo
+  son nulables y cada dato que falta se oculta en vez de mostrarse vacío.
 
 Los tipos de establecimiento llegan en inglés (`micro`, `brewpub`, `regional`, …) y
 se pasan a castellano con un `when` en `Brewery.typeLabelRes()`.
@@ -52,7 +52,7 @@ sirve el servicio de favicons de Google:
 https://www.google.com/s2/favicons?domain={dominio-del-website_url}&sz=128
 ```
 
-Devuelve un PNG de 128x128, que es exactamente lo que Picasso necesita. El dominio
+Devuelve un PNG, que es exactamente lo que Picasso necesita. El dominio
 se saca del `website_url` con `Uri.parse(...).host`, en `Brewery.iconUrlFor()`.
 
 Cuando la cervecería no tiene sitio web, o el dominio ya no existe y el servicio
@@ -208,9 +208,9 @@ botón sale una sola llamada, cuando el usuario ya terminó de escribir.
 | Se corta la conexión en el medio | `IOException` en `onFailure` → mismo mensaje |
 | Error HTTP (404, 500, etc.) | `response.isSuccessful` es false → mensaje con el código |
 | Error al leer el JSON | `onFailure` con otra excepción → "Ocurrió un error inesperado" |
-| Búsqueda sin resultados (lista vacía) | Mensaje "No encontramos cervecerías con esa búsqueda" |
+| Búsqueda sin resultados (lista vacía) | Mensaje "No encontramos cervecerías con esa búsqueda", sin Reintentar porque no falló nada |
 | Campo de búsqueda vacío | Toast pidiendo que escriba algo |
-| Falló algo | Botón **Reintentar**, que repite el último pedido |
+| Sin conexión, error HTTP o inesperado | Botón **Reintentar**, que repite el último pedido |
 | Cervecería sin teléfono / sitio / coordenadas | El dato y su botón no se muestran |
 | Cervecería sin ícono, o ícono 404 | `placeholder` y `error` de Picasso: el vaso dibujado |
 | El celular no tiene marcador, navegador o mapas | `try/catch` de `ActivityNotFoundException` y Toast |
@@ -272,12 +272,12 @@ Una sola tabla, `breweries`, creada en `DatabaseHelper`:
 | `latitude` | REAL | |
 | `longitude` | REAL | |
 | `status` | TEXT | NOT NULL, `visited` o `pending` |
-| `saved_at` | TEXT | NOT NULL, fecha en formato año-mes-día |
+| `saved_at` | TEXT | NOT NULL, fecha y hora en formato año-mes-día hora |
 
 Que el `id` de la API sea la clave primaria evita que la misma cervecería se guarde
-dos veces. La fecha se guarda como `2026-11-04` porque así ordena bien
-alfabéticamente, que es como la compara SQLite en el `ORDER BY`; se da vuelta recién
-al mostrarla.
+dos veces. La fecha se guarda como `2026-11-04 18:30:00` porque así ordena bien
+alfabéticamente, que es como la compara SQLite en el `ORDER BY`, incluso entre las
+guardadas el mismo día. Al mostrarla se da vuelta y se le saca la hora.
 
 Las cuatro operaciones están en `FavoriteRepository`: `insertBrewery` (con
 `ContentValues`), `getBreweriesByStatus` y `getBreweryById` (con `db.query` y un

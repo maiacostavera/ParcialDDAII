@@ -29,7 +29,7 @@
             android:background="?attr/colorSurfaceVariant"
             android:contentDescription="@string/cd_brewery_icon"
             android:padding="6dp"
-            android:scaleType="centerInside"
+            android:scaleType="fitCenter"
             tools:src="@drawable/ic_brewery_placeholder" />
 
         <LinearLayout
@@ -48,7 +48,7 @@
                 android:textColor="?attr/colorOnSurface"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                tools:text="Patagonia Brewing" />
+                tools:text="Cerveceria de Ejemplo" />
 
             <TextView
                 android:id="@+id/tvBreweryType"
@@ -68,7 +68,7 @@
                 android:maxLines="1"
                 android:textColor="?attr/colorOnSurfaceVariant"
                 android:textSize="13sp"
-                tools:text="Bariloche" />
+                tools:text="Ciudad de Ejemplo" />
 
         </LinearLayout>
 

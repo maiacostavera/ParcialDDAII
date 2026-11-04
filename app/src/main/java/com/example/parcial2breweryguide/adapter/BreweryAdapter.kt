@@ -50,7 +50,7 @@ class BreweryAdapter(
             tvBreweryName.text = brewery.name
             tvBreweryType.text = context.getString(brewery.getTypeLabelRes())
 
-            // Hay cervecerias en estado "planning" que todavia no tienen ciudad.
+            // En las muestras siempre vino, pero la API no lo garantiza.
             tvBreweryCity.text = brewery.city ?: context.getString(R.string.not_available)
 
             // El icono sale del sitio web de la cerveceria, y muchas no tienen.

@@ -9,7 +9,7 @@ import com.google.gson.annotations.SerializedName
  *
  * Casi todos los campos son nulables a proposito: la API no completa lo mismo
  * para todas. En una muestra de 50, 47 traian telefono y 43 sitio web, y las
- * que estan en estado "planning" todavia no tienen direccion.
+ * que estan en estado "planning" casi nunca tienen calle cargada.
  */
 data class Brewery(
     @SerializedName("id")

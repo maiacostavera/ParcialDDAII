@@ -86,13 +86,13 @@ class FavoriteAdapter(
     }
 
     /**
-     * La fecha se guarda como ano-mes-dia para que SQLite la ordene bien, pero
-     * se muestra al reves, que es como la escribimos en castellano.
+     * La fecha se guarda como ano-mes-dia y hora para que SQLite la ordene bien, pero
+     * se muestra sin la hora y al reves, que es como la escribimos en castellano.
      */
     private fun formatDate(savedAt: String?): String {
         if (savedAt == null) return ""
 
-        val parts = savedAt.split("-")
+        val parts = savedAt.substringBefore(" ").split("-")
         if (parts.size != 3) return savedAt
 
         return "${parts[2]}/${parts[1]}/${parts[0]}"

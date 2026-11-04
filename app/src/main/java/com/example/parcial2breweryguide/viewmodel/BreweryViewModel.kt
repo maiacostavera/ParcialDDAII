@@ -10,9 +10,9 @@ import com.example.parcial2breweryguide.repository.BreweryRepository
 /**
  * ViewModel del listado y el buscador (la "VM" de MVVM).
  *
- * Le pide los datos al repositorio y traduce el resultado a los tres estados que
- * la pantalla necesita: la lista, si esta cargando, y el mensaje de error. No sabe
- * nada de Retrofit ni de como se consiguen los datos.
+ * Le pide los datos al repositorio y traduce el resultado a los estados que
+ * la pantalla necesita: la lista, si esta cargando, el mensaje y si se puede
+ * reintentar. No sabe nada de Retrofit ni de como se consiguen los datos.
  *
  * Al sobrevivir a la rotacion, la busqueda no se pierde si se gira el celular.
  */
@@ -28,6 +28,11 @@ class BreweryViewModel(private val repository: BreweryRepository) : ViewModel() 
 
     private val _errorMessage = MutableLiveData<String?>()
     val errorMessage: LiveData<String?> get() = _errorMessage
+
+    // Va aparte del mensaje porque "no hubo resultados" tambien muestra un texto,
+    // pero ahi no fallo nada y reintentar daria lo mismo.
+    private val _canRetry = MutableLiveData<Boolean>()
+    val canRetry: LiveData<Boolean> get() = _canRetry
 
     // Guardamos que fue lo ultimo que se pidio para que el boton Reintentar
     // repita exactamente eso. null significa "el listado general".
@@ -84,6 +89,7 @@ class BreweryViewModel(private val repository: BreweryRepository) : ViewModel() 
     private fun startLoading() {
         _isLoading.value = true
         _errorMessage.value = null
+        _canRetry.value = false
     }
 
     /** Traduce el resultado del repositorio a los LiveData que mira la pantalla. */
@@ -112,9 +118,10 @@ class BreweryViewModel(private val repository: BreweryRepository) : ViewModel() 
         }
     }
 
-    /** Vacia la lista y muestra el mensaje, que es lo que hacen los tres errores. */
+    /** Vacia la lista, muestra el mensaje y ofrece reintentar: los tres errores hacen eso. */
     private fun showError(message: String) {
         _breweries.value = emptyList()
         _errorMessage.value = message
+        _canRetry.value = true
     }
 }

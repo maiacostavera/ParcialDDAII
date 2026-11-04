@@ -1,10 +1,12 @@
 package com.example.parcial2breweryguide
 
+import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -96,6 +98,8 @@ class BreweryListFragment : Fragment() {
                 return@setOnClickListener
             }
 
+            hideKeyboard()
+
             // El radio button elegido decide si se usa by_city o by_name.
             val filterIsCity = binding.rbCity.isChecked
             viewModel.searchBreweries(query, filterIsCity)
@@ -103,12 +107,21 @@ class BreweryListFragment : Fragment() {
 
         binding.btnShowAll.setOnClickListener {
             binding.etSearch.text?.clear()
+            hideKeyboard()
             viewModel.loadAllBreweries()
         }
 
         binding.btnRetry.setOnClickListener {
             viewModel.retry()
         }
+    }
+
+    /** Cierra el teclado, porque si no tapa los resultados de la busqueda. */
+    private fun hideKeyboard() {
+        val manager = requireContext()
+            .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+        manager.hideSoftInputFromWindow(binding.etSearch.windowToken, 0)
+        binding.etSearch.clearFocus()
     }
 
     /**
@@ -136,11 +149,13 @@ class BreweryListFragment : Fragment() {
             if (message != null) {
                 binding.tvMessage.text = message
                 binding.tvMessage.visibility = View.VISIBLE
-                binding.btnRetry.visibility = View.VISIBLE
             } else {
                 binding.tvMessage.visibility = View.GONE
-                binding.btnRetry.visibility = View.GONE
             }
+        }
+
+        viewModel.canRetry.observe(viewLifecycleOwner) { canRetry ->
+            binding.btnRetry.visibility = if (canRetry) View.VISIBLE else View.GONE
         }
     }
 

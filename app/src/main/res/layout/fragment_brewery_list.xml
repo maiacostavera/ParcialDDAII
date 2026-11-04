@@ -1,11 +1,16 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Pantalla principal: arriba el buscador con el filtro, abajo la lista. -->
+<!-- Pantalla principal: arriba el buscador con el filtro, abajo la lista.
+     El contenedor es focusable para que el foco inicial caiga aca y no en el campo
+     de texto. Si no, el teclado se abre solo al entrar y tapa la lista. -->
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/listRoot"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".BreweryListFragment">
 
     <com.google.android.material.textfield.TextInputLayout

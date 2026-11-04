@@ -29,8 +29,9 @@ fun BreweryIcon(iconUrl: String?, modifier: Modifier = Modifier) {
         modifier = modifier,
         factory = { context ->
             ImageView(context).apply {
-                // CENTER_INSIDE entra la imagen completa sin deformarla.
-                scaleType = ImageView.ScaleType.CENTER_INSIDE
+                // FIT_CENTER agranda la imagen hasta llenar el cuadro sin deformarla.
+                // Hace falta porque muchos sitios solo tienen un favicon chiquito.
+                scaleType = ImageView.ScaleType.FIT_CENTER
                 contentDescription = context.getString(R.string.cd_brewery_icon)
             }
         },

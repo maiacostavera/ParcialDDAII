@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<!-- Icono "phone" de Material, agregado con el Vector Asset de Android Studio.
+<!-- Icono "phone" de Material.
      Lo usa el boton Llamar de la pantalla de detalle. -->
 <vector xmlns:android="http://schemas.android.com/apk/res/android"
     android:width="24dp"

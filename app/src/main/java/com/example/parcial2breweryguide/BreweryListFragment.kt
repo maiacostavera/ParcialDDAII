@@ -99,6 +99,7 @@ class BreweryListFragment : Fragment() {
             }
 
             hideKeyboard()
+            scrollListToTop()
 
             // El radio button elegido decide si se usa by_city o by_name.
             val filterIsCity = binding.rbCity.isChecked
@@ -108,6 +109,7 @@ class BreweryListFragment : Fragment() {
         binding.btnShowAll.setOnClickListener {
             binding.etSearch.text?.clear()
             hideKeyboard()
+            scrollListToTop()
             viewModel.loadAllBreweries()
         }
 
@@ -122,6 +124,14 @@ class BreweryListFragment : Fragment() {
             .getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         manager.hideSoftInputFromWindow(binding.etSearch.windowToken, 0)
         binding.etSearch.clearFocus()
+    }
+
+    /**
+     * El RecyclerView conserva el scroll aunque cambie la lista, asi que sin esto
+     * los resultados de una busqueda nueva aparecerian desde la mitad.
+     */
+    private fun scrollListToTop() {
+        binding.rvBreweries.scrollToPosition(0)
     }
 
     /**
